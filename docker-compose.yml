@@ -6,7 +6,7 @@ services:
     image: store/intersystems/iris-community:2019.2.0.107.0
     volumes:
      - "./iris-password:/durable/password/"
-    environment:
+    #environment:
      # - ISC_DATA_DIRECTORY=/durable
     ports:
      - "9092:52773"
