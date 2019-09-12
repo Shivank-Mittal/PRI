@@ -1,6 +1,11 @@
 version: "3.6"
 
 services:
+  swagger:
+    container_name: swagger-editor
+    image: swaggerapi/swagger-editor
+    ports:
+      - "9093:8080"
   iris:
     container_name: snext-iris
     build:
