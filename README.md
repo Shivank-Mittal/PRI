@@ -2,5 +2,5 @@
 
 InterSystems Iris Runtime
 
-to start InterSystems IRIS: docker-compose up
-To stop : docker-compose downs
+to start InterSystems IRIS: docker-compose up --build
+To stop : docker-compose down
