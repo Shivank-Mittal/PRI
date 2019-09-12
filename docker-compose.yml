@@ -3,9 +3,12 @@ version: "3.6"
 services:
   iris:
     container_name: snext-iris
-    image: store/intersystems/iris-community:2019.2.0.107.0
-    volumes:
-     - "./iris-password:/durable/password/"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    #image: store/intersystems/iris-community:2019.2.0.107.0
+    #volumes:
+    # - "./iris-password:/durable/password/"
     #environment:
      # - ISC_DATA_DIRECTORY=/durable
     ports:
