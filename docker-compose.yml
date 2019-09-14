@@ -12,8 +12,8 @@ services:
       context: .
       dockerfile: Dockerfile
     #image: store/intersystems/iris-community:2019.2.0.107.0
-    #volumes:
-    # - "./iris-password:/durable/password/"
+    volumes:
+     - "./samples:/durable/samples/"
     #environment:
      # - ISC_DATA_DIRECTORY=/durable
     ports:
