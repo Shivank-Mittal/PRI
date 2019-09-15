@@ -10,7 +10,7 @@ XData ProductionDefinition
     <Setting Target="Host" Name="BatchClass">snext.categorization.ExpeditionRMBatch</Setting>
     <Setting Target="Host" Name="RecordMap">snext.categorization.ExpeditionRM</Setting>
     <Setting Target="Host" Name="TargetConfigNames">ExpeditionRuleSet</Setting>
-    <Setting Target="Adapter" Name="FilePath">/durable/samples/</Setting>
+    <Setting Target="Adapter" Name="FilePath">/durable/samples/in/</Setting>
     <Setting Target="Adapter" Name="FileSpec">*.samples</Setting>
   </Item>
   <Item Name="ExpeditionRuleSet" Category="categorization" ClassName="EnsLib.MsgRouter.RoutingEngine" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
