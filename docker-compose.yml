@@ -1,11 +1,11 @@
 version: "3.6"
 
 services:
-  swagger:
-    container_name: swagger-editor
-    image: swaggerapi/swagger-editor
-    ports:
-      - "9093:8080"
+  #swagger:
+  #  container_name: swagger-editor
+  #  image: swaggerapi/swagger-editor
+  #  ports:
+  #    - "9093:8080"
   iris:
     container_name: snext-iris
     build:
@@ -14,10 +14,11 @@ services:
     #image: store/intersystems/iris-community:2019.2.0.107.0
     volumes:
      - "./samples:/durable/samples/"
+     - "./license:/durable/license/"
     environment:
       #- ISC_DATA_DIRECTORY=/durable
       - TZ=Europe/Paris
     ports:
      - "9092:52773"
      - "9091:51773"
-    command: --password-file /durable/password/password.txt
+    command: --password-file /durable/password/password.txt -k /durable/license/iris.key
