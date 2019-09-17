@@ -1,6 +1,6 @@
 /// RECORDMAP: Modified during compilation of RecordMap 'snext.categorization.ExpeditionRM'
-/// on 2019-09-14 at 22:44:24.396 [2019-09-14 22:44:24.396 UTC]
-/// by user Admin
+/// on 2019-09-16 at 10:36:25.493 [2019-09-16 10:36:25.493 UTC]
+/// by user SuperUser
 Class snext.categorization.ExpeditionRM Extends EnsLib.RecordMap.RecordMap
 {
 
