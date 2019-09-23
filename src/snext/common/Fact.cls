@@ -1,6 +1,6 @@
 Class snext.common.Fact extends %Persistent [Abstract]
 {
-	RelationShip relatedTo as snext.common.EventFact [Cardinality = many, Inverse =  fact];
+	//RelationShip relatedTo as snext.common.EventFact [Cardinality = many, Inverse =  fact];
 	
 Storage Default
 {

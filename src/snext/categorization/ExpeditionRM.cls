@@ -1,5 +1,5 @@
 /// RECORDMAP: Modified during compilation of RecordMap 'snext.categorization.ExpeditionRM'
-/// on 2019-09-16 at 10:36:25.493 [2019-09-16 10:36:25.493 UTC]
+/// on 2019-09-18 at 20:33:56.627 [2019-09-18 20:33:56.627 UTC]
 /// by user SuperUser
 Class snext.categorization.ExpeditionRM Extends EnsLib.RecordMap.RecordMap
 {
@@ -124,14 +124,14 @@ ClassMethod GetRecord(pStream As %IO.DeviceStream, pObject As %RegisteredObject,
 	}
 	Do ..checkMerge(.tCurrChunk, .tRecordData, .tCurrString, $char(59), .tTopPiece)
 	If pGetTopFields {
-		Set pObject.ProduitDésignation = tCurrString
+		Set pObject.ProduitDesignation = tCurrString
 	}
 	If '$data(tRecordData(tCurrChunk, "block")) {
 		Set tCurrString = $piece(tRecordData(tCurrChunk), $char(59), tTopPiece)
 	}
 	Do ..checkMerge(.tCurrChunk, .tRecordData, .tCurrString, $char(59), .tTopPiece)
 	If pGetTopFields {
-		Set pObject.Quantité =  pObject.QuantitéDisplayToLogical(tCurrString)
+		Set pObject.Quantite =  pObject.QuantiteDisplayToLogical(tCurrString)
 	}
 	Quit tStatus
 }
@@ -144,8 +144,8 @@ ClassMethod PutRecord(pStream As %IO.DeviceStream, pObject As %RegisteredObject,
 	Do pStream.Write($char(59) _ $select(pHasTopFields: pObject.SemaineLogicalToDisplay(pObject.Semaine),1: ""),0)
 	Do pStream.Write($char(59) _ $select(pHasTopFields: pObject.DonneurdOrdreNom,1: ""),0)
 	Do pStream.Write($char(59) _ $select(pHasTopFields: pObject.ProduitCodeLogicalToDisplay(pObject.ProduitCode),1: ""),0)
-	Do pStream.Write($char(59) _ $select(pHasTopFields: pObject.ProduitDésignation,1: ""),0)
-	Do pStream.Write($char(59) _ $select(pHasTopFields: pObject.QuantitéLogicalToDisplay(pObject.Quantité),1: ""),0)
+	Do pStream.Write($char(59) _ $select(pHasTopFields: pObject.ProduitDesignation,1: ""),0)
+	Do pStream.Write($char(59) _ $select(pHasTopFields: pObject.QuantiteLogicalToDisplay(pObject.Quantite),1: ""),0)
 	Do pStream.Write($char(10), 0, .tStatus)
 	If $$$ISERR(tStatus) Quit tStatus
 	Quit tStatus
@@ -184,9 +184,9 @@ XData RecordMap [ XMLNamespace = "http://www.intersystems.com/Ensemble/RecordMap
   </Field>
   <Field name="ProduitCode" required="0" ignored="0" datatype="%Integer" sqlColumn="5" repeating="0">
   </Field>
-  <Field name="ProduitDésignation" datatype="%String" sqlColumn="6">
+  <Field name="ProduitDesignation" required="0" ignored="0" datatype="%String" sqlColumn="6" repeating="0">
   </Field>
-  <Field name="Quantité" required="0" ignored="0" datatype="%Integer" sqlColumn="7" repeating="0">
+  <Field name="Quantite" required="0" ignored="0" datatype="%Integer" sqlColumn="7" repeating="0">
   </Field>
 </Record>
 }

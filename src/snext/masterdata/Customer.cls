@@ -3,6 +3,7 @@ Class snext.masterdata.Customer Extends snext.SubscriberEntity
 	
 	property name as %String;
 
+
 Storage Default
 {
 <Data name="CustomerDefaultData">

@@ -2,6 +2,7 @@ Class snext.SubscriberEntity Extends %Persistent [Abstract]
 {
 	property snextSubscriber as snext.Subscriber;
 	
+	Foreignkey snextSubscFK(snextSubscriber) references snext.Subscriber() [OnDelete = cascade ];
 	index subscriberIndex on snextSubscriber [type = bitmap];
 
 

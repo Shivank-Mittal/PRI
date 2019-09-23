@@ -2,9 +2,8 @@ Class snext.masterdata.Product Extends snext.SubscriberEntity
 {
 	property productCode as %String;
 	property productLabel as %String (MAXLEN = 2000);
-	property originator as %String;
-	property quantity as %Integer;
 	
+	index productCodeIdx on productCode [Unique];
 
 Storage Default
 {
