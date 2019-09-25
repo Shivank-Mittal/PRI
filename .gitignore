@@ -1,4 +1,6 @@
 /*.csv
 /license/*
 /samples/src/
+/samples/in/
+/samples/BI/
 .DS_Store
