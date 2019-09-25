@@ -23,21 +23,21 @@ INTO :context.productID, :context.productLabel
 FROM snext_masterdata.Product
 WHERE ProductCode = :request.ProduitCode]]>
 </sql>
-<if name='=Label?' condition='context.productID &amp;&amp; (context.productLabel &apos;= request.ProduitDesignation)' xpos='200' ypos='350' xend='200' yend='950' >
+<if name='Exists?' condition='context.productID' xpos='200' ypos='350' xend='200' yend='950' >
 <annotation><![CDATA[Product exists with same Label ?]]></annotation>
 <true>
 <transform name='shipment' class='snext.categorization.dt.ExpeditionRMToShipment' source='request' target='context.shipment' xpos='200' ypos='500' disabled="true"/>
 <sql xpos='200' ypos='600' disabled="true"/>
 </true>
 <false>
-<if name='Exist?' condition='context.productID' xpos='470' ypos='500' xend='470' yend='850' >
-<annotation><![CDATA[Product exists?]]></annotation>
+<if name='= Desc?' condition='context.productLabel = request.ProduitDesignation' xpos='470' ypos='500' xend='470' yend='850' >
+<annotation><![CDATA[Same Description?]]></annotation>
 <true>
-<call name='Product Validation' target='Product Manager' async='1' xpos='740' ypos='650' >
+<call name='Product Validation' target='Product Manager' async='1' xpos='740' ypos='650' disabled="true">
 <request type='EnsLib.Workflow.TaskRequest' />
 <response type='EnsLib.Workflow.TaskResponse' />
 </call>
-<sync name='Retour Workflow' calls='Product Validation' type='all' xpos='740' ypos='750' />
+<sync name='Retour Workflow' calls='Product Validation' type='all' xpos='740' ypos='750' disabled="true"/>
 </true>
 <false>
 <empty xpos='470' ypos='650' />

@@ -1,8 +1,7 @@
-Class snext.masterdata.Customer Extends snext.SubscriberEntity
+Class snext.masterdata.scn.Customer Extends snext.masterdata.scn.Node
 {
-	
-	property name as %String;
 
+Property name As %String;
 
 Storage Default
 {

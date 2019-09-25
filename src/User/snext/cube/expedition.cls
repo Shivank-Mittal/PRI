@@ -40,7 +40,7 @@ XData Cube [ XMLNamespace = "http://www.intersystems.com/deepsee" ]
       </level>
     </hierarchy>
   </dimension>
-  <dimension name="Week" disabled="false" hasAll="false" allCaption="All DatedeSortieMarchandise" allDisplayName="DatedeSortieMarchandise" sourceProperty="DatedeSortieMarchandise" type="time" calendar="gregorian" iKnowType="entity" hidden="false" showHierarchies="default">
+  <dimension name="WeekYear" disabled="false" hasAll="false" allCaption="All DatedeSortieMarchandise" allDisplayName="DatedeSortieMarchandise" sourceProperty="DatedeSortieMarchandise" type="time" calendar="gregorian" iKnowType="entity" hidden="false" showHierarchies="default">
     <hierarchy name="H1" disabled="false" hidden="false">
       <level name="Week" disabled="false" timeFunction="WeekYear" list="false" useDisplayValue="true" useAsFilter="true" hidden="false">
       </level>
@@ -48,9 +48,15 @@ XData Cube [ XMLNamespace = "http://www.intersystems.com/deepsee" ]
       </level>
     </hierarchy>
   </dimension>
+  <dimension name="Week" disabled="false" hasAll="false" allCaption="All DatedeSortieMarchandise" allDisplayName="DatedeSortieMarchandise" sourceProperty="DatedeSortieMarchandise" type="time" calendar="gregorian" iKnowType="entity" hidden="false" showHierarchies="default">
+    <hierarchy name="H1" disabled="false" hidden="false">
+      <level name="Week" disabled="false" timeFunction="WeekNumber" list="false" useDisplayValue="true" useAsFilter="true" hidden="false">
+      </level>
+    </hierarchy>
+  </dimension>
   <measure name="Quantite" displayName="Quantity" disabled="false" sourceProperty="Quantite" aggregate="SUM" type="number" hidden="false" searchable="false">
   </measure>
-  <calculatedMember name="2 weeks moving sum" disabled="false" dimension="Measures" valueExpression="SUM(%TimeRange(Week.currentMember,Week.CurrentMember.lead($variable.shipmentdelay)),Measures.Quantite)" hidden="false">
+  <calculatedMember name="2 weeks moving sum" disabled="false" dimension="Measures" valueExpression="SUM(%TimeRange(WeekYear.currentMember,WeekYear.CurrentMember.lead($variable.shipmentdelay)),Measures.Quantite)" hidden="false">
   </calculatedMember>
   <listing name="New_listing1" disabled="false" listingType="table" fieldList="DatedeSortieMarchandise,DonneurdOrdreNom,ProduitCode,ProduitDesignation,Quantite">
   </listing>

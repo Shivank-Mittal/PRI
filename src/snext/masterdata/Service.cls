@@ -1,9 +1,12 @@
 Class snext.masterdata.Service Extends %Persistent
 {
-	property name as %String;
-	property productCode as %Integer;
-	
-	index pCode on productCode [Unique];
+
+Property name As %String;
+
+Property productCode As %Integer;
+
+Index pCode On productCode [ Unique ];
+
 Storage Default
 {
 <Data name="ServiceDefaultData">

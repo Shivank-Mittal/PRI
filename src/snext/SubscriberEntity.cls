@@ -6,6 +6,8 @@ Class snext.SubscriberEntity Extends %Persistent [Abstract]
 	index subscriberIndex on snextSubscriber [type = bitmap];
 
 
+
+
 Storage Default
 {
 <Data name="SubscriberEntityDefaultData">

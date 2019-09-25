@@ -1,9 +1,22 @@
 Class snext.Subscriber Extends %Persistent
 {
-	property name;
-	property active as %Boolean;
 
-	//relationship events as snext.SubcriberEvent [Cardinality = children, Inverse = subscriber ];
+Property name;
+
+Property active As %Boolean;
+
+Method initDocDBs() As %Status
+{
+	#dim e as ##class(%Exception)
+
+	try {
+		
+	} catch {
+
+	}
+}
+
+// relationship events as snext.SubcriberEvent [Cardinality = children, Inverse = subscriber ];
 
 Storage Default
 {

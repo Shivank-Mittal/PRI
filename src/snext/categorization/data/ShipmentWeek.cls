@@ -1,10 +1,16 @@
 Class snext.categorization.data.ShipmentWeek extends %Persistent
 {
-	property week as %Integer;
+	property week as %String;
 	property shipmentDate as %Date;
 	property productCode as %Integer;
 	property productDesc as %String;
 	property quantity as %Integer;
+	
+	classmethod ISOWeek(date as %Date) as %String [SqlProc]
+	{
+		set ISOWeek = ##class(%DeepSee.Time.WeekYear).ISOWEEK(date,.pWeek,.pYear)
+		return ISOWeek
+	}
 	
 	//** SQL INSERT
 	//** INSERT INTO snext_categorization_data.ShipmentWeek ("week", shipmentDate, productCode, productDesc, quantity)
@@ -17,11 +23,14 @@ Class snext.categorization.data.ShipmentWeek extends %Persistent
 		&sql(DELETE FROM snext_categorization_data.ShipmentWeek)
 		&sql(
 			INSERT INTO snext_categorization_data.ShipmentWeek (week, shipmentDate, productCode, productDesc, quantity)
-			SELECT {fn week(DatedeSortieMarchandise)}, DatedeSortieMarchandise, ProduitCode, ProduitDesignation, SUM(Quantite)
+			SELECT snext_categorization_data.ShipmentWeek_ISOWeek(DatedeSortieMarchandise), DatedeSortieMarchandise, ProduitCode, ProduitDesignation, SUM(Quantite)
 			FROM snext_categorization_ExpeditionRM.Record
-			GROUP BY {fn week(DatedeSortieMarchandise)}, ProduitCode)
+			GROUP BY snext_categorization_data.ShipmentWeek_ISOWeek(DatedeSortieMarchandise), ProduitCode)
 	}
 	
+	
+
+
 Storage Default
 {
 <Data name="ShipmentWeekDefaultData">

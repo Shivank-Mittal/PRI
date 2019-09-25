@@ -1,15 +1,20 @@
-Class snext.SubscriberService extends snext.SubscriberEntity
+Class snext.SubscriberService Extends snext.SubscriberEntity
 {
-	property service as snext.masterdata.Service;
-	property enabled as %Boolean [InitialExpression = 1 ];
-	property serviceParameters as snext.docdb.serviceParameters;
-	
-	Foreignkey serviceParametersFK(serviceParameters) references snext.docdb.serviceParameters() [OnDelete = cascade];
-	Foreignkey serviceFK(service) references snext.masterdata.Service() [OnDelete = cascade];
-	
-	index serviceIdx on service [type = bitmap ];
-	index serviceParamIdx on serviceParameters [Type = bitmap ];
-	
+
+Property service As snext.masterdata.Service;
+
+Property enabled As %Boolean [ InitialExpression = 1 ];
+
+Property serviceParameters As snext.docdb.serviceParameters;
+
+ForeignKey serviceParametersFK(serviceParameters) References snext.docdb.serviceParameters() [ OnDelete = cascade ];
+
+ForeignKey serviceFK(service) References snext.masterdata.Service() [ OnDelete = cascade ];
+
+Index serviceIdx On service [ Type = bitmap ];
+
+Index serviceParamIdx On serviceParameters [ Type = bitmap ];
+
 Storage Default
 {
 <Data name="SubscriberServiceDefaultData">
