@@ -23,20 +23,20 @@
                     {
                         "snext.masterdata.scn.PointOfDelivery" : "PointOfDelivery",
                         "snext.masterdata.scn.StorageSite" : "StorageSite",
-                        "snext.masterdata.scn.ProductionSite" : "ProductionSite",
+                        "snext.masterdata.scn.Supplier" : "Supplier",
                         "snext.masterdata.scn.PointOfSales" : "PointOfSales",
                         "snext.masterdata.scn.Customer" : "Customer"
                     },
                     "vertice" :
                     {
-                        "snext.masterdata.scn.ProductionRequest" :
+                        "snext.masterdata.scn.DeliveryRequest" :
                         {
-                            "document" : "ProductionRequest",
+                            "document" : "DeliveryRequest",
                             "related" :
                             [
                                 {
                                     "source" : "snext.masterdata.scn.StorageSite",
-                                    "destination" : "snext.masterdata.scn.ProductionSite"
+                                    "destination" : "snext.masterdata.scn.Supplier"
                                 }
                             ]
                         },
@@ -57,7 +57,7 @@
                             "related" :
                             [
                                 {
-                                    "source" : "snext.masterdata.scn.ProductionSite",
+                                    "source" : "snext.masterdata.scn.Supplier",
                                     "destination" : "snext.masterdata.scn.PointOfDelivery"
                                 },
                                 {
