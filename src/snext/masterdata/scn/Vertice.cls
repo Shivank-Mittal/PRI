@@ -5,9 +5,13 @@ Property source As snext.masterdata.scn.Node;
 
 Property destination As snext.masterdata.scn.Node;
 
-Index destinationIdx On destination [ Unique ];
+Index destinationIdx On destination;
 
-Index sourceIdx On source [ Unique ];
+ForeignKey sourceFK(source) References snext.masterdata.scn.Node();
+
+ForeignKey destinationFK(destination) References snext.masterdata.scn.Node();
+
+Index sourceIdx On source;
 
 Storage Default
 {

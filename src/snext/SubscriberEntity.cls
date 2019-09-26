@@ -1,12 +1,11 @@
-Class snext.SubscriberEntity Extends %Persistent [Abstract]
+Class snext.SubscriberEntity Extends %Persistent [ Abstract ]
 {
-	property snextSubscriber as snext.Subscriber;
-	
-	Foreignkey snextSubscFK(snextSubscriber) references snext.Subscriber() [OnDelete = cascade ];
-	index subscriberIndex on snextSubscriber [type = bitmap];
 
+Property snextSubscriber As snext.Subscriber;
 
+ForeignKey snextSubscFK(snextSubscriber) References snext.Subscriber() [ OnDelete = cascade ];
 
+Index subscriberIndex On snextSubscriber [ Type = bitmap ];
 
 Storage Default
 {
