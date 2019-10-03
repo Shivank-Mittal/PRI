@@ -23,9 +23,29 @@ ClassMethod setup(ByRef pVars, pLogLevel As %Integer = 3, pInstaller As %Install
   Quit ##class(%Installer.Manifest).%Generate(%compiledclass, %code, "MyInstall")
 }
 
-ClassMethod Run(snextConfigJSONFile As %String) As %Status
+ClassMethod Run(snextConfigJSONFile As %String, configDocDBName As %String) As %Status
 {
-  return $$$OK
+  set status = $$$OK
+  try {
+    set stream=##class(%Stream.FileCharacter).%New()
+	  s sc = stream.LinkToFile(snextConfigJSONFile)
+    s json = ""
+    if $$$ISERR(sc) $$$ThrowStatus(sc)
+	  While 'stream.AtEnd {
+	    set json = json _ stream.Read()
+	  }
+    if $SYSTEM.DocDB.Exists(configDocDBName)
+    {
+      set db = ##class(%DocDB.Database).%GetDatabase(configDocDBName)
+    } else {
+      set db = ##class(%DocDB.Database).%CreateDatabase(configDocDBName)
+    }
+    do db.%SaveDocument(json)
+  } catch exp {
+    s status = exp.AsStatus()
+  }
+  
+  return status
 }
 
 }

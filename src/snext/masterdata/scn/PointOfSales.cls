@@ -1,5 +1,7 @@
-Class snext.masterdata.scn.PointOfSales extends snext.masterdata.scn.Node
+Class snext.masterdata.scn.PointOfSales Extends snext.masterdata.scn.Node
 {
+
+Parameter NodeType = "PointOfSales";
 
 Storage Default
 {

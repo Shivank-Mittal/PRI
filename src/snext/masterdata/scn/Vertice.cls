@@ -5,11 +5,15 @@ Property source As snext.masterdata.scn.Node;
 
 Property destination As snext.masterdata.scn.Node;
 
+Property document As %DocDB.Document;
+
 Index destinationIdx On destination;
 
 ForeignKey sourceFK(source) References snext.masterdata.scn.Node();
 
 ForeignKey destinationFK(destination) References snext.masterdata.scn.Node();
+
+ForeignKey documentFK(document) References %DocDB.Document();
 
 Index sourceIdx On source;
 
@@ -24,6 +28,9 @@ Storage Default
 </Value>
 <Value name="3">
 <Value>destination</Value>
+</Value>
+<Value name="4">
+<Value>document</Value>
 </Value>
 </Data>
 <DataLocation>^snext.masterdata.scn.VerticeD</DataLocation>
