@@ -1,5 +1,5 @@
 ARG IMAGE=store/intersystems/iris-community:2019.2.0.107.0
-ARG IMAGE=intersystems/iris:2019.3.0.304.0
+ARG IMAGE=intersystems/iris:2019.3.0-stable
 FROM $IMAGE
 
 USER root
@@ -7,9 +7,10 @@ USER root
 WORKDIR /opt/app
 RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /opt/app
 
-USER irisowner
+USER ${ISC_PACKAGE_MGRUSER}
 
 COPY  ./Installer.cls ./
+COPY ./src ./src/ 
 
 COPY ./iris-password/password.txt /durable/password/password.txt
 
