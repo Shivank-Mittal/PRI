@@ -31,19 +31,6 @@ XData MyInstall [ XMLNamespace = INSTALLER ]
         <Arg Value="snext.admin"/>
         <Arg Value="/opt/app/src/swagger-client-generated/swagger.json"/>
       </Invoke>
-      <!-- <CSPApplication
-				Url="/api/admin"
-				Description="REST API for snext administration"
-				Resource="%SNEXT_ADMIN"
-				AuthenticationMethods="32"
-				CSPZENEnabled="false"
-				InboundWebServicesEnabled="true"
-				PermittedClasses='1""snext.admin.disp""'
-				IsNamespaceDefault="false"
-				CookiePath="/api/admin"
-				Grant="%DB_%DEFAULT,${RESOURCE}-ADMIN-CODE,${RESOURCE}-ADMIN-DATA,${RESOURCE}-CODE,${RESOURCE}-DATA"
-				UseSessionCookie="1"
-				/> -->
     </Configuration>
   </Namespace>
   <Namespace Name="%SYS">
