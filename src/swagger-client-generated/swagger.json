@@ -1,0 +1,95 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "Management of snext's subscribers",
+    "version" : "1.0.0",
+    "title" : "snext's subscribers management",
+    "contact" : {
+      "email" : "you@your-company.com"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/blaise-za/snext-api/1.0.0",
+  "tags" : [ {
+    "name" : "admins",
+    "description" : "Secured Admin-only calls"
+  }, {
+    "name" : "developers",
+    "description" : "Operations available to regular developers"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/subscriber" : {
+      "get" : {
+        "tags" : [ "developers" ],
+        "summary" : "returns the list of subscribers",
+        "description" : "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
+        "operationId" : "getSubscribers",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "search results matching criteria",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Subscriber"
+              }
+            }
+          },
+          "400" : {
+            "description" : "bad input parameter"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "admins" ],
+        "summary" : "creates a new subscriber",
+        "description" : "create a subscriber into the system",
+        "operationId" : "createSubscriber",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "subscriber",
+          "description" : "subcriber to add",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Subscriber"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "subscriber created"
+          },
+          "400" : {
+            "description" : "invalid input, object invalid"
+          },
+          "409" : {
+            "description" : "an existing subscriber already exists"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "Subscriber" : {
+      "type" : "object",
+      "required" : [ "id", "name" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "example" : 1000
+        },
+        "name" : {
+          "type" : "string",
+          "example" : "customer-name"
+        }
+      }
+    }
+  }
+}

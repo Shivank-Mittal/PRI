@@ -1,0 +1,85 @@
+{
+    "snext": 
+    {
+        "docDB" : 
+        {
+            "prefixed" : false,
+            "name" : 
+            [
+                "serviceParameters"
+            ]
+        }
+    },
+    "subscriber" : 
+    {
+        "snext.Subscriber" : 
+        {
+            "sc_network" : 
+            {
+                "docDB" :
+                {
+                    "prefixed" : true,
+                    "node" :
+                    {
+                        "snext.masterdata.scn.PointOfDelivery" : "PointOfDelivery",
+                        "snext.masterdata.scn.StorageSite" : "StorageSite",
+                        "snext.masterdata.scn.Supplier" : "Supplier",
+                        "snext.masterdata.scn.PointOfSales" : "PointOfSales",
+                        "snext.masterdata.scn.Customer" : "Customer"
+                    },
+                    "vertice" :
+                    {
+                        "snext.masterdata.scn.DeliveryRequest" :
+                        {
+                            "document" : "DeliveryRequest",
+                            "related" :
+                            [
+                                {
+                                    "source" : "snext.masterdata.scn.StorageSite",
+                                    "destination" : "snext.masterdata.scn.Supplier"
+                                }
+                            ]
+                        },
+                        "snext.masterdata.scn.ShipmentRequest" :
+                        {
+                            "document" : "ShipmentRequest",
+                            "related" :
+                            [
+                                {
+                                    "source" : "snext.masterdata.scn.PointOfSales",
+                                    "destination" : "snext.masterdata.scn.StorageSite"
+                                }
+                            ]
+                        },
+                        "snext.masterdata.scn.ShipOut" :
+                        {
+                            "document" : "ShipOut",
+                            "related" :
+                            [
+                                {
+                                    "source" : "snext.masterdata.scn.Supplier",
+                                    "destination" : "snext.masterdata.scn.PointOfDelivery"
+                                },
+                                {
+                                    "source" : "snext.masterdata.scn.StorageSite",
+                                    "destination" : "snext.masterdata.scn.PointOfDelivery"
+                                }
+                            ]
+                        },
+                        "snext.masterdata.scn.Order" :
+                        {
+                            "document" : "Order",
+                            "related" :
+                            [
+                                {
+                                    "source" : "snext.masterdata.scn.Customer",
+                                    "destination" : "snext.masterdata.scn.PointOfSales"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
