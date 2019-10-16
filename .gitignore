@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 /*.csv
 /license/*
 /samples/src/
 /samples/in/
 /samples/BI/
+=======
+>>>>>>> categorization/master
 .DS_Store
