@@ -21,4 +21,4 @@ services:
     ports:
      - "9092:52773"
      - "9091:51773"
-    command: --password-file /durable/password/password.txt -k /durable/license/iris.key
+    command: --password-file /durable/password/password.txt 
