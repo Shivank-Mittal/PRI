@@ -19,18 +19,18 @@ services:
      - "9091:51773"
     command: --password-file /durable/password/password.txt 
     
-    version: "3.2"
+##    version: "3.2"
 
-services:
+##services:
 
-  traefik:
-    image:  traefik:v2.0
-    command: --api.insecure=true --providers.docker
-    ports:
-       - "80:80"
-       - "8080:8080" 
+##  traefik:
+##    image:  traefik:v2.0
+##    command: --api.insecure=true --providers.docker
+##    expose:
+##       - "80"
+##       - "8080" 
     
-    volumes:
-       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+##    volumes:
+##       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
     

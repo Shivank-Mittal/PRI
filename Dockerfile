@@ -1,6 +1,7 @@
 ARG IMAGE=store/intersystems/iris-community:2019.2.0.107.0
 ARG IMAGE=intersystems/iris:2019.3.0-stable
 ARG IMAGE=store/intersystems/iris-community:2019.3.0.309.0
+ARG IMAGE=store/intersystems/iris-community:2019.4.0.379.0
 FROM $IMAGE
 
 USER root
