@@ -5,7 +5,7 @@
     "version" : "1.0.0",
     "title" : "snext's subscribers management",
     "contact" : {
-      "email" : "you@your-company.com"
+      "email" : "info@snext-solutions.com"
     },
     "license" : {
       "name" : "Apache 2.0",
@@ -51,16 +51,13 @@
         "summary" : "creates a new subscriber",
         "description" : "create a subscriber into the system",
         "operationId" : "createSubscriber",
-        "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "in" : "body",
           "name" : "subscriber",
+          "in" : "query",
           "description" : "subcriber to add",
           "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/Subscriber"
-          }
+          "type" : "string"
         } ],
         "responses" : {
           "201" : {

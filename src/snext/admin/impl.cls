@@ -1,6 +1,6 @@
 /// Management of snext's subscribers<br/>
 /// Business logic class defined by OpenAPI in snext.admin.spec<br/>
-/// Created Oct 15, 2019 09:25:50
+/// Updated Nov 4, 2019 14:50:38
 Class snext.admin.impl Extends %REST.Impl [ ProcedureBlock ]
 {
 
@@ -20,7 +20,7 @@ ClassMethod getSubscribers() As %DynamicObject
 /// create a subscriber into the system<br/>
 /// The method arguments hold values for:<br/>
 ///     subscriber, subcriber to add<br/>
-ClassMethod createSubscriber(subscriber As %DynamicObject) As %DynamicObject
+ClassMethod createSubscriber(subscriber As %String) As %DynamicObject
 {
     //(Place business logic here)
     //Do ..%SetStatusCode(<HTTP_status_code>)

@@ -1,4 +1,4 @@
-Class snext.config.SubcriberInstaller
+Class snext.config.SubscriberInstaller
 {
 
 XData MyInstall [ XMLNamespace = INSTALLER ]
@@ -17,6 +17,7 @@ XData MyInstall [ XMLNamespace = INSTALLER ]
       <Database Name="${DBNAME}-DATA" Dir="${APPPATH}${DBNAME}-DATA" Create="yes" Resource="${RESOURCE}"/>
       <ClassMapping Package="snext" From="${CORE_DBNAME}-CODE"/>
     </Configuration>
+    <Production Name="Production"/>
   </Namespace>
 
 </Manifest>
@@ -25,7 +26,16 @@ XData MyInstall [ XMLNamespace = INSTALLER ]
 ClassMethod installSubscriber(name As %String) As %Status
 {
   set pVars("DBNAME") = name
-  Quit ##class(snext.config.SubcriberInstaller).setup(.pVars)
+  set sc = $$$OK
+  try {
+    $$$ThrowOnError(##class(snext.config.SubscriberInstaller).setup(.pVars))
+    set subscriber = ##class(snext.Subscriber).%New(name)
+    $$$ThrowOnError(subscriber.%Save())
+    $$$ThrowOnError(subscriber.initDocDBs())
+  } catch exp {
+    set sc = exp.AsStatus()
+  }
+  quit sc
 }
 
 ClassMethod setup(ByRef pVars, pLogLevel As %Integer = 3, pInstaller As %Installer.Installer, pLogger As %Installer.AbstractLogger) As %Status [ CodeMode = objectgenerator, Internal ]

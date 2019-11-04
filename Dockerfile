@@ -12,6 +12,7 @@ RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /opt/app
 USER ${ISC_PACKAGE_MGRUSER}
 
 COPY  ./Installer.cls ./
+COPY ./swagger-client-generated ./swagger-client-generated/
 COPY ./src ./src/ 
 
 COPY ./iris-password/password.txt /durable/password/password.txt
