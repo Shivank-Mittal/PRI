@@ -6,8 +6,10 @@ XData MyInstall [ XMLNamespace = INSTALLER ]
 <Manifest>
   <Default Name="NAMESPACE" Value="SNEXT"/>
   <Default Name="DBNAME" Value="SNEXT"/>
-  <Default Name="APPPATH" Dir="/opt/app/" />
+  <Default Name="APPPATH" Dir="/opt/app"/>
   <Default Name="RESOURCE" Value="%DB_${DBNAME}" />
+  <Default Name="SourceDir" Value="${APPPATH}src"/>
+  <Default Name="SwaggerDir" Value="${APPPATH}swagger-client-generated"/>
 
   <Resource Description="Ressource pour l'accès aux applications d'administration snext" Name="%SNEXT_ADMIN" Permission=""/>
 
@@ -16,22 +18,15 @@ XData MyInstall [ XMLNamespace = INSTALLER ]
       <Database Name="${DBNAME}-CODE" Dir="${APPPATH}${DBNAME}-CODE" Create="yes" Resource="${RESOURCE}-CODE"/>
       <Database Name="${DBNAME}-DATA" Dir="${APPPATH}${DBNAME}-DATA" Create="yes" Resource="${RESOURCE}-DATA"/>
     </Configuration>
-  </Namespace>
-  <Namespace Name="${NAMESPACE}-ADMIN" Code="${DBNAME}-CODE" Data="${DBNAME}-ADMIN-DATA" Create="yes" Ensemble="1">
-    <Configuration>
-      <Database Name="${DBNAME}-CODE" Dir="${APPPATH}${DBNAME}-CODE" Create="no" Resource="${RESOURCE}-CODE"/>
-      <Database Name="${DBNAME}-ADMIN-DATA" Dir="${APPPATH}${DBNAME}-ADMIN-DATA" Create="yes" Resource="${RESOURCE}-ADMIN-DATA"/>
-      <Database Name="${DBNAME}-ADMIN-CODE" Dir="${APPPATH}${DBNAME}-ADMIN-CODE" Create="yes" Resource="${RESOURCE}-ADMIN-CODE"/>
-      <ClassMapping Package="snext.admin" From="${DBNAME}-ADMIN-CODE"/>
-      <Invoke Class="%REST.API" Method="CreateApplication" CheckStatus="1">
+    <Import File="${SourceDir}" Flags="ck" Recurse="1" IgnoreErrors="1"/>
+    <Invoke Class="%REST.API" Method="CreateApplication" CheckStatus="1">
         <Arg Value="snext.admin"/>
-        <Arg Value="/opt/app/src/swagger-client-generated/swagger.json"/>
-      </Invoke>
-    </Configuration>
+        <Arg Value="${SwaggerDir}/swagger.json"/>
+    </Invoke>
   </Namespace>
   <Namespace Name="%SYS">
     <Invoke Class="App.Installer" Method="createRESTApp" CheckStatus="1">
-      <Arg Value="${NAMESPACE}-ADMIN"/>
+      <Arg Value="${NAMESPACE}"/>
       <Arg Value="/api/admin"/>
       <Arg Value="snext.admin.disp"/>
     </Invoke>
@@ -56,6 +51,11 @@ ClassMethod createRESTApp(namespace As %String, URL As %String, dispatchClass As
   quit:$$$ISERR(status) status
   write "Web application """_webName_""" was created!",!
   quit $$$OK
+}
+
+ClassMethod createCoreAPIs(swaggerFile As %String) As %Status
+{
+  quit ##class(%REST.API).CreateApplication("snext.admin", swaggerFile)
 }
 
 }

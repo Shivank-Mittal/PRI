@@ -93,6 +93,13 @@ Method createRelatedDocDBs(prefix As %String, list As %String) As %Status [ Inte
 	quit status
 }
 
+ClassMethod exists(name As %String) As %Boolean
+{
+	set count = 0
+	&SQL(SELECT count(*) INTO :count FROM snext.Subscriber WHERE name=:name)
+	Quit (count > 0)
+}
+
 Index nameIdx On name [ Unique ];
 
 // relationship events as snext.SubcriberEvent [Cardinality = children, Inverse = subscriber ];
