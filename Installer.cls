@@ -6,7 +6,7 @@ XData MyInstall [ XMLNamespace = INSTALLER ]
 <Manifest>
   <Default Name="NAMESPACE" Value="SNEXT"/>
   <Default Name="DBNAME" Value="SNEXT"/>
-  <Default Name="APPPATH" Value="/opt/app/"/>
+  <Default Name="APPPATH" Dir="/opt/app"/>
   <Default Name="RESOURCE" Value="%DB_${DBNAME}" />
   <Default Name="SourceDir" Value="${APPPATH}src"/>
   <Default Name="SwaggerDir" Value="${APPPATH}swagger-client-generated"/>
@@ -17,16 +17,8 @@ XData MyInstall [ XMLNamespace = INSTALLER ]
     <Configuration>
       <Database Name="${DBNAME}-CODE" Dir="${APPPATH}${DBNAME}-CODE" Create="yes" Resource="${RESOURCE}-CODE"/>
       <Database Name="${DBNAME}-DATA" Dir="${APPPATH}${DBNAME}-DATA" Create="yes" Resource="${RESOURCE}-DATA"/>
-      <Import File="${SourceDir}" Flags="ck" Recurse="1" IgnoreErrors="1"/>
     </Configuration>
-  </Namespace>
-  <Namespace Name="${NAMESPACE}-ADMIN" Code="${DBNAME}-CODE" Data="${DBNAME}-ADMIN-DATA" Create="yes" Ensemble="1">
-    <Configuration>
-      <Database Name="${DBNAME}-CODE" Dir="${APPPATH}${DBNAME}-CODE" Create="no" Resource="${RESOURCE}-CODE"/>
-      <Database Name="${DBNAME}-ADMIN-DATA" Dir="${APPPATH}${DBNAME}-ADMIN-DATA" Create="yes" Resource="${RESOURCE}-ADMIN-DATA"/>
-      <Database Name="${DBNAME}-ADMIN-CODE" Dir="${APPPATH}${DBNAME}-ADMIN-CODE" Create="yes" Resource="${RESOURCE}-ADMIN-CODE"/>
-      <ClassMapping Package="snext.admin" From="${DBNAME}-ADMIN-CODE"/>
-    </Configuration>
+    <Import File="${SourceDir}" Flags="ck" Recurse="1" IgnoreErrors="1"/>
     <Invoke Class="%REST.API" Method="CreateApplication" CheckStatus="1">
         <Arg Value="snext.admin"/>
         <Arg Value="${SwaggerDir}/swagger.json"/>
@@ -34,7 +26,7 @@ XData MyInstall [ XMLNamespace = INSTALLER ]
   </Namespace>
   <Namespace Name="%SYS">
     <Invoke Class="App.Installer" Method="createRESTApp" CheckStatus="1">
-      <Arg Value="${NAMESPACE}-ADMIN"/>
+      <Arg Value="${NAMESPACE}"/>
       <Arg Value="/api/admin"/>
       <Arg Value="snext.admin.disp"/>
     </Invoke>

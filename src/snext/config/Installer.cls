@@ -6,7 +6,7 @@ XData MyInstall [ XMLNamespace = INSTALLER ]
 <Manifest>
   <Default Name="CORE_DBNAME" Value="SNEXT"/>
   <Default Name="DBNAME" Value="SUBSCRIBER"/>
-  <Default Name="APPPATH" Dir="/opt/app/" />
+  <Default Name="APPPATH" Dir="/opt/app/"/>
 
   <Default Name="NAMESPACE" Value="${DBNAME}"/>
   <Default Name="RESOURCE" Value="%DB_${DBNAME}" />
@@ -17,9 +17,7 @@ XData MyInstall [ XMLNamespace = INSTALLER ]
       <Database Name="${DBNAME}-DATA" Dir="${APPPATH}${DBNAME}-DATA" Create="yes" Resource="${RESOURCE}"/>
       <ClassMapping Package="snext" From="${CORE_DBNAME}-CODE"/>
     </Configuration>
-    <Production Name="Production"/>
   </Namespace>
-
 </Manifest>
 }
 

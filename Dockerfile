@@ -8,6 +8,7 @@ USER root
 
 WORKDIR /opt/app
 RUN chown ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_IRISGROUP} /opt/app
+RUN chmod g+w /opt/app
 
 USER ${ISC_PACKAGE_MGRUSER}
 
