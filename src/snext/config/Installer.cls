@@ -21,14 +21,15 @@ XData MyInstall [ XMLNamespace = INSTALLER ]
 </Manifest>
 }
 
-ClassMethod installSubscriber(name As %String) As %Status
+ClassMethod installSubscriber(name As %String, ByRef GUID As %Binary) As %Status
 {
-  set pVars("DBNAME") = name
   set sc = $$$OK
   try {
-    $$$ThrowOnError(##class(snext.config.SubscriberInstaller).setup(.pVars))
     set subscriber = ##class(snext.Subscriber).%New(name)
     $$$ThrowOnError(subscriber.%Save())
+    set GUID = ##class(snext.Subscriber).%GUID(subscriber.%Oid())
+    set pVars("DBNAME") = "Sub-"_GUID
+    $$$ThrowOnError(##class(snext.config.SubscriberInstaller).setup(.pVars))
     $$$ThrowOnError(subscriber.initDocDBs())
   } catch exp {
     set sc = exp.AsStatus()

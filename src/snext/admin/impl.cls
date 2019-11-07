@@ -41,8 +41,8 @@ ClassMethod createSubscriber(subscriber As %String) As %DynamicObject
             do ..%SetStatusCode(..#SubscriberAlreadyExists)
             set json = {"statusCode":(..#SubscriberAlreadyExists)}
         } else {
-            $$$ThrowOnError(##class(snext.config.SubscriberInstaller).installSubscriber(subscriber))
-            set json = {"statuscode":(..#SubscriberCreated)}
+            $$$ThrowOnError(##class(snext.config.SubscriberInstaller).installSubscriber(subscriber, .GUID))
+            set json = {"statuscode":(..#SubscriberCreated), "subscriber": {"name":(subscriber), "GUID":(GUID)}}
             do ..%SetStatusCode(..#SubscriberCreated)
         }
     } Catch ex {

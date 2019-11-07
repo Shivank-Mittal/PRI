@@ -7,11 +7,23 @@ Property active As %Boolean;
 
 Property docDBs As array Of %DocDB.Database;
 
+Parameter GUIDENABLED = 1;
+
 Method %OnNew(initvalue As %String) As %Status
 {
     If $get(initvalue)="" Quit $$$ERROR($$$GeneralError,"Must supply a name")
     Set ..name=initvalue
     Quit $$$OK
+}
+
+ClassMethod GetInstance(GUID As %Binary) As snext.Subscriber
+{
+	set subscriber = $$$NULLOREF
+	set sc = $$$OK
+	&sql(select OID into :OID from %ExtentMgr.GUID where GUID = :GUID)
+	set:$get(IOD,0) subscriber = ##class(snext.Subscriber).%Open(OID,, .sc )
+	$$$ThrowOnError(sc)
+	quit subscriber
 }
 
 Method initDocDBs() As %Status
@@ -74,7 +86,7 @@ Method getDocDBConfig(Output list As %String, Output isPrefixed As %Boolean) As 
 
 Method generatePrefix() As %String [ Internal ]
 {
-	quit ("snext.docdb."_..name)
+	quit ("snext.docdb."_$zstrip(..%GUID(..%Oid()),"*P"))
 }
 
 Method createRelatedDocDBs(prefix As %String, list As %String) As %Status [ Internal ]
